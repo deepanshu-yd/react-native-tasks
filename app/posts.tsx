@@ -49,27 +49,33 @@ export default function PostsScreen() {
 
   return (
     <View style={styles.container}>
-      {/* Header for the posts screen */}
-      <Text style={styles.header}>Posts</Text>
+      {/* Header section with title at the top */}
+      <View style={styles.headerContainer}>
+        <Text style={styles.header}>Posts</Text>
+        
+        {/* Navigation button to counter screen */}
+        <View style={styles.navigationButton}>
+          <Button 
+            title="Go to Counter" 
+            onPress={() => router.push("/counter" as any)} 
+          />
+        </View>
+      </View>
       
-      {/* Navigation button to counter screen */}
-      <View style={styles.navigationButton}>
-        <Button 
-          title="Go to Counter" 
-          onPress={() => router.push("/counter" as any)} 
+      {/* Middle section - Posts list using flex: 1 to take available space */}
+      <View style={styles.listContainer}>
+        <FlatList
+          data={posts}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={renderItem}
+          showsVerticalScrollIndicator={false}
         />
       </View>
       
-      {/* FlatList to display all posts */}
-      <FlatList
-        data={posts}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={renderItem}
-        showsVerticalScrollIndicator={false}
-        ListFooterComponent={
-          <Text style={styles.footer}>End of List</Text>
-        }
-      />
+      {/* Footer section at the bottom */}
+      <View style={styles.footerContainer}>
+        <Text style={styles.footer}>End of List</Text>
+      </View>
     </View>
   );
 }
@@ -77,13 +83,33 @@ export default function PostsScreen() {
 const styles = StyleSheet.create({
   container: { 
     flex: 1, 
-    padding: 10,
     backgroundColor: '#fff'
+  },
+  // Header container using flexbox - fixed at top
+  headerContainer: {
+    paddingHorizontal: 10,
+    paddingTop: 10,
+    backgroundColor: '#f8f9fa',
+    borderBottomWidth: 1,
+    borderBottomColor: '#e9ecef'
+  },
+  // List container - takes remaining space using flex: 1
+  listContainer: {
+    flex: 1,
+    paddingHorizontal: 10
+  },
+  // Footer container - fixed at bottom
+  footerContainer: {
+    padding: 15,
+    backgroundColor: '#f8f9fa',
+    borderTopWidth: 1,
+    borderTopColor: '#e9ecef',
+    alignItems: 'center'
   },
   card: {
     backgroundColor: "#f9f9f9",
     padding: 15,
-    marginBottom: 10,
+    marginVertical: 5,
     borderRadius: 8,
     shadowColor: '#000',
     shadowOffset: {
@@ -100,20 +126,19 @@ const styles = StyleSheet.create({
     fontSize: 16
   },
   header: { 
-    fontSize: 20, 
+    fontSize: 24, 
     fontWeight: "bold", 
-    marginVertical: 10,
-    textAlign: 'center'
+    marginVertical: 15,
+    textAlign: 'center',
+    color: '#2c3e50'
   },
   footer: { 
-    textAlign: "center", 
-    marginTop: 10, 
+    fontSize: 14,
     fontStyle: "italic",
-    color: '#666',
-    paddingBottom: 20
+    color: '#6c757d'
   },
   navigationButton: {
-    marginBottom: 10,
+    marginBottom: 15,
     paddingHorizontal: 20
   }
 });
