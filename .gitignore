@@ -1,4 +1,62 @@
-# Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
+# Learn more https://docs.github.co# typescript
+*.tsbuildinfo
+
+# IDE and Editor files
+/.vscode
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+
+# Build outputs
+build/
+dist/
+out/
+
+# Temporary folders
+tmp/
+temp/
+
+# React Native specific
+android/app/build/
+ios/build/
+*.hmap
+*.ipa
+*.apk
+*.aab
+
+# Expo specific (additional)
+.expo-shared/
+
+# Example files
+app-exampleet-started/getting-started-with-git/ignoring-files
 
 # dependencies
 node_modules/
@@ -37,3 +95,5 @@ yarn-error.*
 *.tsbuildinfo
 
 app-example
+
+.vscode
