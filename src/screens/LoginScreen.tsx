@@ -1,26 +1,29 @@
 import { router } from "expo-router";
 import React, { useState } from "react";
-import { Alert, Button, StyleSheet, Text, TextInput, View } from "react-native";
+import { Alert, Button, Platform, StyleSheet, Text, TextInput, View } from "react-native";
 
 export default function LoginScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleLogin = () => {
-    Alert.alert(
-      "Login Info",
-      `Email: ${email}\nPassword: ${password}`,
-      [
-        {
-          text: "OK",
-          onPress: () => {
-            setTimeout(() => {
-              router.push("/posts");
-            }, 100);
+    if (Platform.OS === 'web') {
+      // For web: show alert and navigate immediately
+      alert(`Login Info\nEmail: ${email}\nPassword: ${password}`);
+      router.replace("/posts");
+    } else {
+      // For mobile: use native Alert with callback
+      Alert.alert(
+        "Login Info",
+        `Email: ${email}\nPassword: ${password}`,
+        [
+          {
+            text: "OK",
+            onPress: () => router.push("/posts")
           }
-        }
-      ]
-    );
+        ]
+      );
+    }
   };
 
   return (

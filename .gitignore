@@ -91,3 +91,6 @@ ios/build/
 
 # Example files
 app-example
+
+# Local Netlify folder
+.netlify
