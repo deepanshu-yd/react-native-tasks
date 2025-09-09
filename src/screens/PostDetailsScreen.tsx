@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, ScrollView } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 
 interface PostDetailsProps {
   route: {
@@ -15,19 +15,13 @@ interface PostDetailsProps {
 }
 
 export default function PostDetailsScreen({ route }: PostDetailsProps) {
-  // Extract post data from navigation parameters
   const { post } = route.params;
 
   return (
     <ScrollView style={styles.container}>
       <View style={styles.content}>
-        {/* Display post ID and user ID for reference */}
         <Text style={styles.metadata}>Post ID: {post.id} | User ID: {post.userId}</Text>
-        
-        {/* Display the post title */}
         <Text style={styles.title}>{post.title}</Text>
-        
-        {/* Display the full post body */}
         <Text style={styles.body}>{post.body}</Text>
       </View>
     </ScrollView>
@@ -35,7 +29,7 @@ export default function PostDetailsScreen({ route }: PostDetailsProps) {
 }
 
 const styles = StyleSheet.create({
-  container: { 
+  container: {
     flex: 1,
     backgroundColor: '#fff'
   },
@@ -48,13 +42,13 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     fontStyle: 'italic'
   },
-  title: { 
-    fontSize: 22, 
-    fontWeight: "bold", 
+  title: {
+    fontSize: 22,
+    fontWeight: "bold",
     marginBottom: 15,
     lineHeight: 28
   },
-  body: { 
+  body: {
     fontSize: 16,
     lineHeight: 24,
     color: '#333'

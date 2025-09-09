@@ -1,21 +1,15 @@
-import React from "react";
-import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { useLocalSearchParams } from "expo-router";
+import React from "react";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 
 export default function PostDetailsScreen() {
-  // Get the post parameters passed from the previous screen
   const { id, title, body, userId } = useLocalSearchParams();
 
   return (
     <ScrollView style={styles.container}>
       <View style={styles.content}>
-        {/* Display post ID and user ID for reference */}
         <Text style={styles.metadata}>Post ID: {id} | User ID: {userId}</Text>
-        
-        {/* Display the post title */}
         <Text style={styles.title}>{title}</Text>
-        
-        {/* Display the full post body */}
         <Text style={styles.body}>{body}</Text>
       </View>
     </ScrollView>
@@ -23,7 +17,7 @@ export default function PostDetailsScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { 
+  container: {
     flex: 1,
     backgroundColor: '#fff'
   },
@@ -36,13 +30,13 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     fontStyle: 'italic'
   },
-  title: { 
-    fontSize: 22, 
-    fontWeight: "bold", 
+  title: {
+    fontSize: 22,
+    fontWeight: "bold",
     marginBottom: 15,
     lineHeight: 28
   },
-  body: { 
+  body: {
     fontSize: 16,
     lineHeight: 24,
     color: '#333'

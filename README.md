@@ -1,6 +1,60 @@
 # Welcome to your Expo app 👋
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+# React Native Tasks
+
+This is a React Native job assignment project demonstrating core React Native concepts including:
+
+## Features Implemented
+
+1. **Login Screen** - Email and password inputs with validation
+2. **Posts List** - Fetches and displays posts from JSONPlaceholder API
+3. **Post Details** - Shows full post content when tapped
+4. **Counter Screen** - Simple increment/decrement counter
+5. **Navigation** - React Navigation stack navigation between screens
+6. **Flexbox Layout** - Proper header, content, and footer layout
+
+## Project Structure
+
+```
+/react-native-tasks
+ ┣ 📂 src
+ ┃ ┣ 📂 screens
+ ┃ ┃ ┣ LoginScreen.tsx
+ ┃ ┃ ┣ PostsScreen.tsx
+ ┃ ┃ ┣ PostDetailsScreen.tsx
+ ┃ ┃ ┗ CounterScreen.tsx
+ ┃ ┣ 📂 navigation
+ ┃ ┃ ┗ AppNavigator.tsx
+ ┃ ┗ 📂 components
+ ┃     ┗ PostItem.tsx
+ ┣ App.js
+ ┗ README.md
+```
+
+## Technologies Used
+
+- React Native
+- TypeScript
+- React Navigation
+- Expo
+- JSONPlaceholder API
+- StyleSheet for styling
+
+## Getting Started
+
+1. Install dependencies: `npm install`
+2. Start the project: `npm start`
+3. Run on device/simulator: `npm run ios` or `npm run android`
+
+## Learning Features
+
+Each component includes detailed comments explaining:
+- React Hooks (useState, useEffect)
+- TypeScript interfaces
+- Flexbox layouts
+- Navigation patterns
+- API integration
+- Component composition
 
 ## Get started
 

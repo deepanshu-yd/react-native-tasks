@@ -1,99 +1,107 @@
 import React, { useEffect, useState } from "react";
-import { View, FlatList, Text, TouchableOpacity, StyleSheet } from "react-native";
-import { router } from "expo-router";
+import { Button, FlatList, StyleSheet, Text, View } from "react-native";
+import PostItem from "../components/PostItem";
 
-export default function PostsScreen() {
-  // State to store the list of posts fetched from API
-  const [posts, setPosts] = useState([]);
+interface Post {
+  id: number;
+  title: string;
+  body: string;
+  userId: number;
+}
 
-  // useEffect hook to fetch posts when component mounts
+interface PostsScreenProps {
+  navigation: {
+    navigate: (screen: string, params?: any) => void;
+  };
+}
+
+export default function PostsScreen({ navigation }: PostsScreenProps) {
+  const [posts, setPosts] = useState<Post[]>([]);
+
   useEffect(() => {
-    // Fetch posts from JSONPlaceholder API
     fetch("https://jsonplaceholder.typicode.com/posts")
       .then((res) => res.json())
-      .then((data) => setPosts(data))
+      .then((data: Post[]) => setPosts(data))
       .catch((error) => console.error("Error fetching posts:", error));
   }, []);
 
-  // Function to render each post item in the FlatList
-  const renderItem = ({ item }) => (
-    <TouchableOpacity
-      style={styles.card}
-      onPress={() => 
-        // Navigate to PostDetails screen with the selected post data
-        router.push({
-          pathname: "/post-details",
-          params: { 
-            id: item.id,
-            title: item.title,
-            body: item.body,
-            userId: item.userId
-          }
-        })
-      }
-    >
-      {/* Display post title in bold */}
-      <Text style={styles.title}>{item.title}</Text>
-      {/* Display post body with maximum 2 lines */}
-      <Text numberOfLines={2}>{item.body}</Text>
-    </TouchableOpacity>
+  const handlePostPress = (post: Post) => {
+    navigation.navigate("PostDetails", { post });
+  };
+
+  const renderItem = ({ item }: { item: Post }) => (
+    <PostItem
+      post={item}
+      onPress={() => handlePostPress(item)}
+    />
   );
 
   return (
     <View style={styles.container}>
-      {/* Header for the posts screen */}
-      <Text style={styles.header}>Posts</Text>
-      
-      {/* FlatList to display all posts */}
-      <FlatList
-        data={posts}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={renderItem}
-        showsVerticalScrollIndicator={false}
-        ListFooterComponent={
-          <Text style={styles.footer}>End of List</Text>
-        }
-      />
+      <View style={styles.headerContainer}>
+        <Text style={styles.header}>Posts</Text>
+
+        <View style={styles.navigationButton}>
+          <Button
+            title="Go to Counter"
+            onPress={() => navigation.navigate("Counter")}
+          />
+        </View>
+      </View>
+
+      <View style={styles.listContainer}>
+        <FlatList
+          data={posts}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={renderItem}
+          showsVerticalScrollIndicator={false}
+        />
+      </View>
+
+      <View style={styles.footerContainer}>
+        <Text style={styles.footer}>End of List</Text>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { 
-    flex: 1, 
-    padding: 10,
+  container: {
+    flex: 1,
     backgroundColor: '#fff'
   },
-  card: {
-    backgroundColor: "#f9f9f9",
+  headerContainer: {
+    paddingHorizontal: 10,
+    paddingTop: 10,
+    backgroundColor: '#f8f9fa',
+    borderBottomWidth: 1,
+    borderBottomColor: '#e9ecef'
+  },
+  listContainer: {
+    flex: 1,
+    paddingHorizontal: 10
+  },
+  footerContainer: {
     padding: 15,
-    marginBottom: 10,
-    borderRadius: 8,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    elevation: 2,
+    backgroundColor: '#f8f9fa',
+    borderTopWidth: 1,
+    borderTopColor: '#e9ecef',
+    alignItems: 'center'
   },
-  title: { 
-    fontWeight: "bold", 
-    marginBottom: 5,
-    fontSize: 16
+  header: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginVertical: 15,
+    textAlign: 'center',
+    color: '#2c3e50'
   },
-  header: { 
-    fontSize: 20, 
-    fontWeight: "bold", 
-    marginVertical: 10,
-    textAlign: 'center'
-  },
-  footer: { 
-    textAlign: "center", 
-    marginTop: 10, 
+  footer: {
+    fontSize: 14,
     fontStyle: "italic",
-    color: '#666',
-    paddingBottom: 20
+    color: '#6c757d'
   },
+  navigationButton: {
+    marginBottom: 15,
+    paddingHorizontal: 20
+  }
 });

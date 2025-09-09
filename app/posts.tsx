@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { View, FlatList, Text, TouchableOpacity, StyleSheet, Button } from "react-native";
 import { router } from "expo-router";
+import React, { useEffect, useState } from "react";
+import { Button, FlatList, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-// Define the Post interface for TypeScript
 interface Post {
   id: number;
   title: string;
@@ -11,27 +10,22 @@ interface Post {
 }
 
 export default function PostsScreen() {
-  // State to store the list of posts fetched from API
   const [posts, setPosts] = useState<Post[]>([]);
 
-  // useEffect hook to fetch posts when component mounts
   useEffect(() => {
-    // Fetch posts from JSONPlaceholder API
     fetch("https://jsonplaceholder.typicode.com/posts")
       .then((res) => res.json())
       .then((data: Post[]) => setPosts(data))
       .catch((error) => console.error("Error fetching posts:", error));
   }, []);
 
-  // Function to render each post item in the FlatList
   const renderItem = ({ item }: { item: Post }) => (
     <TouchableOpacity
       style={styles.card}
-      onPress={() => 
-        // Navigate to PostDetails screen with the selected post data
+      onPress={() =>
         router.push({
           pathname: "/post-details" as any,
-          params: { 
+          params: {
             id: item.id.toString(),
             title: item.title,
             body: item.body,
@@ -40,29 +34,24 @@ export default function PostsScreen() {
         })
       }
     >
-      {/* Display post title in bold */}
       <Text style={styles.title}>{item.title}</Text>
-      {/* Display post body with maximum 2 lines */}
       <Text numberOfLines={2}>{item.body}</Text>
     </TouchableOpacity>
   );
 
   return (
     <View style={styles.container}>
-      {/* Header section with title at the top */}
       <View style={styles.headerContainer}>
         <Text style={styles.header}>Posts</Text>
-        
-        {/* Navigation button to counter screen */}
+
         <View style={styles.navigationButton}>
-          <Button 
-            title="Go to Counter" 
-            onPress={() => router.push("/counter" as any)} 
+          <Button
+            title="Go to Counter"
+            onPress={() => router.push("/counter" as any)}
           />
         </View>
       </View>
-      
-      {/* Middle section - Posts list using flex: 1 to take available space */}
+
       <View style={styles.listContainer}>
         <FlatList
           data={posts}
@@ -71,8 +60,7 @@ export default function PostsScreen() {
           showsVerticalScrollIndicator={false}
         />
       </View>
-      
-      {/* Footer section at the bottom */}
+
       <View style={styles.footerContainer}>
         <Text style={styles.footer}>End of List</Text>
       </View>
@@ -81,8 +69,8 @@ export default function PostsScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { 
-    flex: 1, 
+  container: {
+    flex: 1,
     backgroundColor: '#fff'
   },
   // Header container using flexbox - fixed at top
@@ -120,19 +108,19 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     elevation: 2,
   },
-  title: { 
-    fontWeight: "bold", 
+  title: {
+    fontWeight: "bold",
     marginBottom: 5,
     fontSize: 16
   },
-  header: { 
-    fontSize: 24, 
-    fontWeight: "bold", 
+  header: {
+    fontSize: 24,
+    fontWeight: "bold",
     marginVertical: 15,
     textAlign: 'center',
     color: '#2c3e50'
   },
-  footer: { 
+  footer: {
     fontSize: 14,
     fontStyle: "italic",
     color: '#6c757d'

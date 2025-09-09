@@ -1,38 +1,31 @@
 import React, { useState } from "react";
-import { View, Text, Button, StyleSheet } from "react-native";
+import { Button, StyleSheet, Text, View } from "react-native";
 
 export default function CounterScreen() {
-  // State hook to manage the counter value
   const [count, setCount] = useState(0);
 
   return (
     <View style={styles.container}>
-      {/* Header section */}
       <View style={styles.header}>
         <Text style={styles.headerTitle}>Counter App</Text>
       </View>
-      
-      {/* Main content section with counter display */}
+
       <View style={styles.content}>
         <Text style={styles.counter}>{count}</Text>
-        
-        {/* Container for increment and decrement buttons */}
+
         <View style={styles.buttons}>
-          {/* Increment button - increases count by 1 */}
-          <Button 
-            title="+" 
-            onPress={() => setCount(count + 1)} 
+          <Button
+            title="+"
+            onPress={() => setCount(count + 1)}
           />
-          
-          {/* Decrement button - decreases count by 1 */}
-          <Button 
-            title="-" 
-            onPress={() => setCount(count - 1)} 
+
+          <Button
+            title="-"
+            onPress={() => setCount(count - 1)}
           />
         </View>
       </View>
-      
-      {/* Footer section */}
+
       <View style={styles.footer}>
         <Text style={styles.footerText}>Tap + or - to change the counter</Text>
       </View>
@@ -41,7 +34,7 @@ export default function CounterScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { 
+  container: {
     flex: 1,
     backgroundColor: '#fff'
   },
@@ -65,14 +58,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
-  counter: { 
-    fontSize: 60, 
+  counter: {
+    fontSize: 60,
     marginBottom: 30,
     fontWeight: 'bold',
     color: '#2c3e50'
   },
-  buttons: { 
-    flexDirection: "row", 
+  buttons: {
+    flexDirection: "row",
     gap: 30,
     alignItems: 'center'
   },
