@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, FlatList, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, FlatList, Text, TouchableOpacity, StyleSheet, Button } from "react-native";
 import { router } from "expo-router";
 
 // Define the Post interface for TypeScript
@@ -51,6 +51,14 @@ export default function PostsScreen() {
     <View style={styles.container}>
       {/* Header for the posts screen */}
       <Text style={styles.header}>Posts</Text>
+      
+      {/* Navigation button to counter screen */}
+      <View style={styles.navigationButton}>
+        <Button 
+          title="Go to Counter" 
+          onPress={() => router.push("/counter" as any)} 
+        />
+      </View>
       
       {/* FlatList to display all posts */}
       <FlatList
@@ -104,4 +112,8 @@ const styles = StyleSheet.create({
     color: '#666',
     paddingBottom: 20
   },
+  navigationButton: {
+    marginBottom: 10,
+    paddingHorizontal: 20
+  }
 });
